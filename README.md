@@ -167,6 +167,8 @@ codex exec --skip-git-repo-check --sandbox read-only --ephemeral "Reply with one
 
 云端 **Python 3.11** 实际执行核心测试和 Tkinter 虚拟显示测试。Codex、麦克风及语音外部调用使用 Mock，不消耗 API 额度。详细结果见 [验证记录](docs/VALIDATION.md)。CI 配置 Linux/Windows 核心检查和 Linux GUI Mock 测试，自动化不能代替物理设备验收。
 
+首次发布的 [GitHub Actions](https://github.com/ZJJUP/PPT-AI-Coach/actions/runs/42588829272) 已实际通过：Windows Python 3.11 核心测试 **32 项**，Linux 核心及 GUI Mock 测试共 **37 项**；两平台依赖安装、代码检查与格式检查均通过。
+
 **以下必须回到 Windows 本机验证，不能宣称通过：** 物理麦克风/权限、Whisper 真实模型下载与英语准确率、私人账号 Codex 调用/沙箱/额度、Edge 网络与 Windows MP3 播放、SAPI 英语语音、Windows Tkinter/DPI/文件对话框和 `start.bat` 双击。Windows wheel 能获取不等于 Windows 安装运行通过。
 
 开发检查命令：

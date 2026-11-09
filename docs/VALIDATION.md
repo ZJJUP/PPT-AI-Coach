@@ -12,7 +12,7 @@
 - Codex 使用 Mock 验证 subprocess 参数、标准输入、多轮上下文、结构化输出、超时和错误响应；**未实际发起模型/API 请求**。
 - Whisper 使用 Mock 检查 CPU、int8、英语、离线缓存和错误处理；**未下载实际 Whisper 权重、未测试真实识别质量**。
 - TTS 测试模拟 Edge 失败和本地回退、取消旧请求；**未调用在线语音或 Windows SAPI**。
-- Windows x64 / CPython 3.11 锁定清单中的 **43 个运行依赖包均成功下载**到云端临时目录，并检查许可证元数据。未执行 Windows 二进制，不算 Windows 安装通过。
+- Windows x64 / CPython 3.11 锁定清单中的 **43 个运行依赖包均成功下载**到 Linux 云端临时目录，并检查许可证元数据。这一步未执行 Windows 二进制；另见下方 GitHub Actions 实际安装和测试结果。
 - 核对本机云端 `codex exec --help` 支持使用的参数；这不证明用户家中 Windows 的 CLI 版本及认证可用。
 - `ui-preview.png` 来自系统 Python 3.13.5 / Tk 8.6 的实际 Tk 窗口（字体渲染预览），只有原创虚构内容和明确标记的 Mock 回复，没有真实用户资料。自动化测试仍使用目标 Python 3.11，预览的辅助渲染器版本不作为支持版本声明。
 
@@ -26,6 +26,20 @@ python -m ruff format --check .
 ```
 
 标准 Linux 环境也可使用 `xvfb-run -a python -m pytest -q`。GitHub Actions 定义 Linux/Windows 核心测试及 Linux 虚拟显示 GUI 测试，具体远程执行情况以仓库 Actions 为准，不把尚未执行的配置当作通过结果。
+
+## GitHub 发布后补充验证
+
+源码提交 `3e576192add5904b55f02f1853e4f61d53f758cf` 的
+[GitHub Actions #42588829272](https://github.com/ZJJUP/PPT-AI-Coach/actions/runs/42588829272)
+已实际完成，结论为 **success**：
+
+- `windows-latest` / Python 3.11：依赖安装、Ruff 检查、格式检查通过；**32 passed, 5 deselected**（GUI 测试在 Windows CI 中不执行）。
+- `ubuntu-latest` / Python 3.11：同样的核心检查通过，**32 passed**；Xvfb 下 GUI Mock 测试 **5 passed**。
+- 推送后重新从 Public 仓库 clone，核对远程与本地提交一致，37 个文件齐全，Git 对象完整性检查通过。
+- 实际下载 Public 仓库的 main.zip，与提交内容逐文件核对；`start.bat` 按 .gitattributes 使用 Windows CRLF，其他文件内容一致。
+- 暂存区和现有完整历史的凭据特征/禁止文件类型检查未发现问题；没有上传 PPT、真实录音、会话 JSON、模型、缓存、环境或认证信息。
+
+Windows CI 安装/核心 Mock 测试通过，仅说明其托管运行器上的这些检查通过；**不代表家中物理麦克风、原生 GUI、TTS、Whisper 真实识别或私人 Codex 登录已验证**。下表保持待本机验收状态。
 
 ## 仍待家中 Windows 实机验证
 
