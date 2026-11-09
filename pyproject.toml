@@ -1,0 +1,19 @@
+[project]
+name = "ppt-ai-coach"
+version = "1.0.0"
+description = "Private desktop English presentation practice with your local Codex CLI"
+requires-python = ">=3.11,<3.12"
+license = "MIT"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra"
+markers = ["gui: requires a graphical display"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

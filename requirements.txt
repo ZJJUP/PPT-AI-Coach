@@ -1,0 +1,7 @@
+# Python 3.11, Windows 10/11 x64. Includes LGPL dependencies: see THIRD_PARTY_NOTICES.md.
+python-pptx==1.0.2
+numpy==2.2.6
+sounddevice==0.5.3
+soundfile==0.13.1
+faster-whisper==1.2.1
+edge-tts==7.2.3
